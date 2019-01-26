@@ -1,7 +1,10 @@
 var router = require('express').Router()
 var mysql = require('mysql')
 var bodyParser = require('body-parser')
+var cors = require('cors')
+
 router.use(bodyParser.json())
+router.use(cors())
 
 var db = mysql.createConnection({
     host: 'localhost',
@@ -14,7 +17,79 @@ db.connect(()=>{
     console.log('Database terhubung!')
 })
 
+router.post('/login', (req, res)=>{
+    var dbStat = 'select * from users where nama = ? and password = ?'
+    var dataLogin = [req.body.nama, req.body.password]
+    db.query(dbStat, dataLogin, (error, output) => {
+        if(error){
+            console.log(error)
+            res.send({status: 'error'})
+        } else {
+            if (output[0]){
+                var dataUser = output[0]
+                dataUser.status = 'ok'
+                console.log(dataUser)
+                res.send(dataUser)
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
 
+router.post('/menu/master', (req, res)=>{
+    var dbStat = `select nama, submenu, menu from users, menus, usermenu where users.id = usermenu.id_user and menus.id = usermenu.id_menu and nama = ? and menu = ?`
+    db.query(dbStat, [req.body.nama, 'Master File'], (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var subMenu = output
+                console.log(subMenu)
+                res.send(subMenu)
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
+
+router.post('/menu/mutasi', (req, res)=>{
+    var dbStat = `select nama, submenu, menu from users, menus, usermenu where users.id = usermenu.id_user and menus.id = usermenu.id_menu and nama = ? and menu = ?`
+    db.query(dbStat, [req.body.nama, 'Mutasi'], (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var subMenu = output
+                console.log(subMenu)
+                res.send(subMenu)
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
+
+router.post('/menu/laporan', (req, res)=>{
+    var dbStat = `select nama, submenu, menu from users, menus, usermenu where users.id = usermenu.id_user and menus.id = usermenu.id_menu and nama = ? and menu = ?`
+    db.query(dbStat, [req.body.nama, 'Laporan'], (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var subMenu = output
+                console.log(subMenu)
+                res.send(subMenu)
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
 
 module.exports = router
 
