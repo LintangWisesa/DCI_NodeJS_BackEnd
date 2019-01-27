@@ -38,8 +38,8 @@ router.post('/login', (req, res)=>{
 })
 
 router.post('/menu/master', (req, res)=>{
-    var dbStat = `select nama, submenu, menu from users, menus, usermenu where users.id = usermenu.id_user and menus.id = usermenu.id_menu and nama = ? and menu = ?`
-    db.query(dbStat, [req.body.nama, 'Master File'], (error, output) => {
+    var dbStat = `select nama, submenu, menu from users, menus, usermenu where users.id = usermenu.id_user and menus.id = usermenu.id_menu and nama = ? and menu = ? and status = ?`
+    db.query(dbStat, [req.body.nama, 'Master File', 'ok'], (error, output) => {
         if(error){
             console.log(error)
             res.send(error)
@@ -56,8 +56,8 @@ router.post('/menu/master', (req, res)=>{
 })
 
 router.post('/menu/mutasi', (req, res)=>{
-    var dbStat = `select nama, submenu, menu from users, menus, usermenu where users.id = usermenu.id_user and menus.id = usermenu.id_menu and nama = ? and menu = ?`
-    db.query(dbStat, [req.body.nama, 'Mutasi'], (error, output) => {
+    var dbStat = `select nama, submenu, menu from users, menus, usermenu where users.id = usermenu.id_user and menus.id = usermenu.id_menu and nama = ? and menu = ? and status = ?`
+    db.query(dbStat, [req.body.nama, 'Mutasi', 'ok'], (error, output) => {
         if(error){
             console.log(error)
             res.send(error)
@@ -74,8 +74,8 @@ router.post('/menu/mutasi', (req, res)=>{
 })
 
 router.post('/menu/laporan', (req, res)=>{
-    var dbStat = `select nama, submenu, menu from users, menus, usermenu where users.id = usermenu.id_user and menus.id = usermenu.id_menu and nama = ? and menu = ?`
-    db.query(dbStat, [req.body.nama, 'Laporan'], (error, output) => {
+    var dbStat = `select nama, submenu, menu from users, menus, usermenu where users.id = usermenu.id_user and menus.id = usermenu.id_menu and nama = ? and menu = ? and status = ?`
+    db.query(dbStat, [req.body.nama, 'Laporan', 'ok'], (error, output) => {
         if(error){
             console.log(error)
             res.send(error)
