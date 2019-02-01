@@ -95,6 +95,25 @@ router.post('/menu/laporan', (req, res)=>{
     })
 })
 
+// get all submenus from user id tertentu
+router.get('/menu/id/:id', (req, res)=>{
+    var dbStat = `select * from usermenu, menus where usermenu.id_menu = menus.id and id_user = ?`
+    db.query(dbStat, req.params.id, (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var users = output
+                console.log(users)
+                res.send(users)
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
+
 // get all users
 router.get('/users', (req, res)=>{
     var dbStat = `select * from users`
@@ -135,7 +154,7 @@ router.get('/depts', (req, res)=>{
 
 // get all users with its depts
 router.get('/userDept', (req, res)=>{
-    var dbStat = `select users.id, nama, password, users.dept, fulldept, dibuat, diupdate from users, departments where users.dept = departments.dept`
+    var dbStat = `select users.id, nama, password, users.dept, fulldept, dibuat, diupdate from users, departments where users.dept = departments.dept order by users.id`
     db.query(dbStat, (error, output) => {
         if(error){
             console.log(error)
