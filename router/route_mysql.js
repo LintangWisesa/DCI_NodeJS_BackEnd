@@ -114,6 +114,25 @@ router.get('/menu/id/:id', (req, res)=>{
     })
 })
 
+// get all submenus
+router.get('/menu', (req, res)=>{
+    var dbStat = `select * from menus`
+    db.query(dbStat, req.params.id, (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var users = output
+                console.log(users)
+                res.send(users)
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
+
 // get all users
 router.get('/users', (req, res)=>{
     var dbStat = `select * from users`
