@@ -1,3 +1,5 @@
+// table user, dept, menu
+
 var router = require('express').Router()
 var mysql = require('mysql')
 var bodyParser = require('body-parser')
