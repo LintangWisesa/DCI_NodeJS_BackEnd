@@ -1,7 +1,7 @@
 var express = require('express')
 var cors = require('cors')
-var route_user = require('./router/fileuser')
-var route_master = require('./router/master')
+var route_user = require('./router/user')
+var route_master = require('./router/karyawan')
 
 var app = express()
 app.use(route_user)

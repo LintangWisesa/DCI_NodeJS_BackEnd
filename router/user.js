@@ -135,25 +135,6 @@ router.get('/menu', (req, res)=>{
     })
 })
 
-// get all users
-router.get('/users', (req, res)=>{
-    var dbStat = `select * from users`
-    db.query(dbStat, (error, output) => {
-        if(error){
-            console.log(error)
-            res.send(error)
-        } else {
-            if (output){
-                var users = output
-                console.log(users)
-                res.send(users)
-            } else {
-                res.send({status: 'error'})
-            }
-        }
-    })
-})
-
 // get all departments
 router.get('/depts', (req, res)=>{
     var dbStat = `select * from departments`
@@ -176,6 +157,186 @@ router.get('/depts', (req, res)=>{
 // get all users with its depts
 router.get('/userDept', (req, res)=>{
     var dbStat = `select users.id, nama, password, users.dept, fulldept, dibuat, diupdate from users, departments where users.dept = departments.dept order by users.id`
+    db.query(dbStat, (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var users = output
+                console.log(users)
+                res.send(users)
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
+
+// get all users
+router.get('/users', (req, res)=>{
+    var dbStat = `select * from users`
+    db.query(dbStat, (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var users = output
+                console.log(users)
+                res.send(users)
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
+
+// get specific user by id
+router.get('/users/:id', (req, res)=>{
+    var dbStat = `select * from users where id = ${req.params.id}`
+    db.query(dbStat, (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var users = output
+                console.log(users)
+                res.send(users)
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
+
+// post new user
+router.post('/users', (req, res)=>{
+    var dbStat = 'insert into users set ?'
+    var data = {
+        nama: req.body.nama,
+        password: req.body.pass,
+        dept: req.body.dept
+    }
+    db.query(dbStat, data, (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var dbStat = `select * from users where nama = '${req.body.nama}' and password = '${req.body.pass}'`
+                db.query(dbStat, (error, output) => {
+                    if(error){
+                        console.log(error)
+                        res.send(error)
+                    } else {
+                        if (output){
+                            var users = output
+                            console.log(users)
+                            res.send(users)
+                        } else {
+                            res.send({status: 'error'})
+                        }
+                    }
+                })
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
+
+// post usermenu
+router.post('/menu', (req, res)=>{
+    var dbStat = `insert into usermenu values ?`
+    var data = req.body.dataBaru
+    db.query(dbStat, [data], (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var users = output
+                console.log(users)
+                res.send(users)
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
+
+// delete user & its menu
+router.delete('/users/:id', (req, res)=>{
+    var dbStat = `delete from users where id = ${req.params.id}`
+    db.query(dbStat, (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var dbStat = `delete from usermenu where id_user = ${req.params.id}`
+                db.query(dbStat, (error, output) => {
+                    if(error){
+                        console.log(error)
+                        res.send(error)
+                    } else {
+                        if (output){
+                            var users = output
+                            console.log(users)
+                            res.send(users)
+                        } else {
+                            res.send({status: 'error'})
+                        }
+                    }
+                })
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
+
+// update user by id & delete its menu
+router.put('/users/:id', (req, res)=>{
+    var dbStat = `update users set ? where id = ${req.params.id}`
+    var data = {
+        nama: req.body.nama,
+        password: req.body.pass,
+        dept: req.body.dept
+    }
+    db.query(dbStat, data, (error, output) => {
+        if(error){
+            console.log(error)
+            res.send(error)
+        } else {
+            if (output){
+                var dbStat = `delete from usermenu where id_user = ${req.params.id}`
+                db.query(dbStat, (error, output) => {
+                    if(error){
+                        console.log(error)
+                        res.send(error)
+                    } else {
+                        if (output){
+                            var users = output
+                            console.log(users)
+                            res.send(users)
+                        } else {
+                            res.send({status: 'error'})
+                        }
+                    }
+                })
+            } else {
+                res.send({status: 'error'})
+            }
+        }
+    })
+})
+
+// delete usermenu by id
+router.delete('/menu/:id', (req, res)=>{
+    var dbStat = `delete from usermenu where id_user = ${req.params.id}`
     db.query(dbStat, (error, output) => {
         if(error){
             console.log(error)
