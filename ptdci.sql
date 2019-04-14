@@ -27,7 +27,7 @@ CREATE TABLE `departments` (
   `dept` varchar(10) NOT NULL,
   `fulldept` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,8 +36,33 @@ CREATE TABLE `departments` (
 
 LOCK TABLES `departments` WRITE;
 /*!40000 ALTER TABLE `departments` DISABLE KEYS */;
-INSERT INTO `departments` VALUES (1,'AD','Administrator'),(2,'MK','Marketing'),(3,'HR','Human Resources');
+INSERT INTO `departments` VALUES (1,'AD','Administrator'),(2,'MK','Marketing'),(3,'HR','Human Resources'),(4,'ac','acounting'),(5,'dl','delivery'),(6,'eg','engineering'),(7,'ga','general affair');
 /*!40000 ALTER TABLE `departments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `divisi`
+--
+
+DROP TABLE IF EXISTS `divisi`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `divisi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kodediv` varchar(2) DEFAULT NULL,
+  `namadiv` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `divisi`
+--
+
+LOCK TABLES `divisi` WRITE;
+/*!40000 ALTER TABLE `divisi` DISABLE KEYS */;
+INSERT INTO `divisi` VALUES (1,'ad','administrasi'),(2,'tk','teknik'),(3,'wh','warehouse');
+/*!40000 ALTER TABLE `divisi` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -52,7 +77,7 @@ CREATE TABLE `jabatan` (
   `jabat` varchar(2) NOT NULL,
   `keterangan` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,8 +86,33 @@ CREATE TABLE `jabatan` (
 
 LOCK TABLES `jabatan` WRITE;
 /*!40000 ALTER TABLE `jabatan` DISABLE KEYS */;
-INSERT INTO `jabatan` VALUES (1,'sp','supervisor'),(2,'op','operator');
+INSERT INTO `jabatan` VALUES (1,'sp','supervisor'),(2,'op','operator'),(3,'ad','administrator'),(4,'am','assistant manager'),(5,'av','advisor'),(6,'dd','driver delivery'),(7,'do','driver office'),(8,'ds','dies setter');
 /*!40000 ALTER TABLE `jabatan` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `kategori`
+--
+
+DROP TABLE IF EXISTS `kategori`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `kategori` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kodekate` varchar(2) DEFAULT NULL,
+  `namakate` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `kategori`
+--
+
+LOCK TABLES `kategori` WRITE;
+/*!40000 ALTER TABLE `kategori` DISABLE KEYS */;
+INSERT INTO `kategori` VALUES (1,'dr','direct'),(2,'in','indirect'),(3,'sd','semi direct');
+/*!40000 ALTER TABLE `kategori` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -220,7 +270,7 @@ CREATE TABLE `subseksi` (
   `jabat` varchar(2) NOT NULL,
   `keterangan` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +279,7 @@ CREATE TABLE `subseksi` (
 
 LOCK TABLES `subseksi` WRITE;
 /*!40000 ALTER TABLE `subseksi` DISABLE KEYS */;
-INSERT INTO `subseksi` VALUES (1,'bp','big press'),(2,'sm','small press');
+INSERT INTO `subseksi` VALUES (1,'bp','big press'),(2,'sp','small press'),(3,'ac','accounting'),(4,'fi','finance'),(5,'ak','analis kimia');
 /*!40000 ALTER TABLE `subseksi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,4 +344,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-22 14:25:04
+-- Dump completed on 2019-04-14 18:38:43
